@@ -1,0 +1,24 @@
+{
+    "app_name": "TimeBox",
+    "app_tagline": "Plan your day effectively",
+    "top_priorities": "Top Priorities",
+    "brain_dump": "Brain Dump",
+    "daily_schedule": "Daily Schedule",
+    "enter_new_task": "Enter new task",
+    "add": "Add",
+    "empty_slot": "Empty Slot",
+    "pick_a_date": "Pick a date",
+    "done": "Done",
+    "time": "Time",
+    "full_hour": ":00",
+    "half_hour": ":30",
+      "date": "Please choose the date",
+      "braindump": "Think about all what you can do in this day....",
+      "toppriorities": "What are your three top priorities?",
+      "boxtime": "Box your time for more efficiency",
+      "next": "Next",
+      "finish": "Finish",
+    
+      "priorities_full": "Top Priorities is full! Remove an item to add new ones.",
+      "task_added_to_priorities": "Added {task} to Top Priorities"
+}

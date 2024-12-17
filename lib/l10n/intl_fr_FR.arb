@@ -1,0 +1,24 @@
+{
+    "app_name": "TimeBox",
+    "app_tagline": "Planifiez votre journée",
+    "top_priorities": "Priorités Principales",
+    "brain_dump": "Déversoir Mental",
+    "daily_schedule": "Emploi du Temps Quotidien",
+    "enter_new_task": "Entrer une nouvelle tâche",
+    "add": "Ajouter",
+    "empty_slot": "Emplacement Vide",
+    "pick_a_date": "Choisissez une date",
+    "done": "Terminé",
+    "time": "Heure",
+    "full_hour": ":00",
+    "half_hour": ":30",
+        "date": "Veuillez choisir une date",
+        "braindump": "Réfléchissez à tout ce que vous pouvez faire dans cette journée....",
+        "toppriorities": "Quelles sont vos trois principales priorités ?",
+        "boxtime": "Organisez votre temps pour plus d'efficacité",
+        "next": "Suivant",
+        "finish": "Terminer",
+
+        "priorities_full": "Les Priorités Principales sont pleines ! Supprimez un élément pour en ajouter.",
+        "task_added_to_priorities": "{task} ajouté aux Priorités Principales"
+}
