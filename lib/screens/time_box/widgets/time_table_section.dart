@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:time_box/generated/l10n.dart';
 import 'package:time_box/utils/helpers/helpers.dart';
 import '../../../models/time_slot.dart';
 
@@ -24,6 +25,7 @@ class TimeTableSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final delegate = S.of(context);
     return Card(
       elevation: 4,
       child: SingleChildScrollView(
@@ -32,9 +34,10 @@ class TimeTableSection extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                "Daily Schedule",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              Text(
+                delegate.daily_schedule,
+                style:
+                    const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 16),
               Table(
@@ -57,7 +60,7 @@ class TimeTableSection extends StatelessWidget {
                       ),
                     ),
                     children: [
-                      _buildHeaderCell(context, "Time"),
+                      _buildHeaderCell(context, delegate.time),
                       _buildHeaderCell(context, ":00"),
                       _buildHeaderCell(context, ":30"),
                     ],
