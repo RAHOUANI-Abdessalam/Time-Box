@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import '../../generated/l10n.dart';
 import '../../models/time_slot.dart';
 import '../../services/storage_service.dart';
-import '../../utils/helpers/helpers.dart';
+// import '../../utils/helpers/helpers.dart';
 import '../../utils/helpers/tutorial_helper.dart';
 import 'widgets/brain_dump_section.dart';
 import 'widgets/time_table_section.dart';
@@ -24,6 +25,7 @@ class _TimeBoxScreenState extends State<TimeBoxScreen>
   List<TimeSlot> timeSlots = [];
   String selectedTable = "";
   DateTime selectedDate = DateTime.now();
+  String currentLocale = 'en'; // Default locale
 
   late AnimationController _animationController;
 
@@ -47,6 +49,19 @@ class _TimeBoxScreenState extends State<TimeBoxScreen>
     _initializeData();
   }
 
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // Update locale and date format whenever dependencies (including Localizations) change
+    final newLocale = Localizations.localeOf(context).languageCode;
+    if (newLocale != currentLocale) {
+      setState(() {
+        currentLocale = newLocale;
+        _updateDateController();
+      });
+    }
+  }
+
   void showLanguageSelectionDialog(BuildContext context) {
     showDialog(
       context: context,
@@ -58,31 +73,19 @@ class _TimeBoxScreenState extends State<TimeBoxScreen>
             children: [
               MaterialButton(
                 onPressed: () {
-                  setState(() {
-                    S.load(const Locale("en", "US"));
-                    widget.onLanguageChanged(const Locale('en'));
-                    Navigator.of(context).pop();
-                  });
+                  _changeLanguage('en', const Locale('en', 'US'));
                 },
                 child: const Text('English'),
               ),
               MaterialButton(
                 onPressed: () {
-                  setState(() {
-                    S.load(const Locale("fr", "FR"));
-                    widget.onLanguageChanged(const Locale('fr'));
-                    Navigator.of(context).pop();
-                  });
+                  _changeLanguage('fr', const Locale('fr', 'FR'));
                 },
                 child: const Text('French'),
               ),
               MaterialButton(
                 onPressed: () {
-                  setState(() {
-                    S.load(const Locale("ar", "AR"));
-                    widget.onLanguageChanged(const Locale('ar'));
-                    Navigator.of(context).pop();
-                  });
+                  _changeLanguage('ar', const Locale('ar', 'AR'));
                 },
                 child: const Text('Arabic'),
               ),
@@ -91,6 +94,16 @@ class _TimeBoxScreenState extends State<TimeBoxScreen>
         );
       },
     );
+  }
+
+  void _changeLanguage(String langCode, Locale locale) {
+    setState(() {
+      currentLocale = langCode;
+      S.load(locale);
+      widget.onLanguageChanged(locale);
+      _updateDateController();
+    });
+    Navigator.of(context).pop();
   }
 
   void _setupAnimation() {
@@ -134,8 +147,16 @@ class _TimeBoxScreenState extends State<TimeBoxScreen>
   }
 
   void _updateDateController() {
-    _dateController.text =
-        "${selectedDate.day} / ${getMonth(selectedDate.month)} / ${selectedDate.year}";
+    try {
+      final formattedDate =
+          DateFormat('dd/MMM/yyyy', currentLocale).format(selectedDate);
+      _dateController.text = formattedDate;
+    } catch (e) {
+      // Fallback to default locale if there's an error
+      final formattedDate =
+          DateFormat('dd/MMM/yyyy', 'en').format(selectedDate);
+      _dateController.text = formattedDate;
+    }
   }
 
   Future<void> _selectDate(BuildContext context) async {
