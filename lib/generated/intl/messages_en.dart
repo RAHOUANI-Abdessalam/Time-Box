@@ -24,6 +24,9 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "Arabic": MessageLookupByLibrary.simpleMessage("Arabic"),
+        "English": MessageLookupByLibrary.simpleMessage("English"),
+        "French": MessageLookupByLibrary.simpleMessage("French"),
         "add": MessageLookupByLibrary.simpleMessage("Add"),
         "app_name": MessageLookupByLibrary.simpleMessage("TimeBox"),
         "app_tagline":
@@ -47,6 +50,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "pick_a_date": MessageLookupByLibrary.simpleMessage("Pick a date"),
         "priorities_full": MessageLookupByLibrary.simpleMessage(
             "Top Priorities is full! Remove an item to add new ones."),
+        "select_language":
+            MessageLookupByLibrary.simpleMessage("Select Language"),
         "task_added_to_priorities": m0,
         "time": MessageLookupByLibrary.simpleMessage("Time"),
         "top_priorities":

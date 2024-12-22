@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:time_box/screens/time_box/time_box_screen.dart';
+import 'package:time_box/services/storage_service.dart';
 import 'package:time_box/utils/themes/themes.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:time_box/generated/l10n.dart';
@@ -12,12 +13,25 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  Locale _locale = const Locale('en'); // Default locale set to English
+  late Locale _locale = const Locale("en"); // Default locale set to English
+
+  @override
+  void initState() {
+    super.initState();
+    _loadSavedLanguage();
+  }
 
   // Function to update the locale dynamically
   void _setLocale(Locale locale) {
     setState(() {
       _locale = locale;
+    });
+  }
+
+  Future<void> _loadSavedLanguage() async {
+    final savedLanguage = await StorageService.loadLanguage();
+    setState(() {
+      _locale = Locale(savedLanguage);
     });
   }
 
@@ -39,7 +53,7 @@ class _MyAppState extends State<MyApp> {
       localizationsDelegates: const [
         S.delegate,
         GlobalMaterialLocalizations.delegate,
-        // GlobalCupertinoLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate
       ],
       supportedLocales: S.delegate.supportedLocales,

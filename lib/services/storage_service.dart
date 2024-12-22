@@ -3,6 +3,18 @@ import 'dart:convert';
 import '../models/time_slot.dart';
 
 class StorageService {
+  static const String languageKey = 'selectedLanguage';
+
+  static Future<void> saveLanguage(String languageCode) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(languageKey, languageCode);
+  }
+
+  static Future<String> loadLanguage() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString(languageKey) ?? 'en'; // Default to English
+  }
+
   static Future<void> saveData({
     required List<String> topPriorities,
     required List<String> brainDump,

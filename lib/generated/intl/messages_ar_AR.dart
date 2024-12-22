@@ -24,6 +24,9 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "Arabic": MessageLookupByLibrary.simpleMessage("العربية"),
+        "English": MessageLookupByLibrary.simpleMessage("الإنجليزية"),
+        "French": MessageLookupByLibrary.simpleMessage("الفرنسية"),
         "add": MessageLookupByLibrary.simpleMessage("إضافة"),
         "app_name": MessageLookupByLibrary.simpleMessage("صندوق الوقت"),
         "app_tagline": MessageLookupByLibrary.simpleMessage("خطط يومك بفعالية"),
@@ -45,6 +48,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "pick_a_date": MessageLookupByLibrary.simpleMessage("اختر تاريخًا"),
         "priorities_full": MessageLookupByLibrary.simpleMessage(
             "الأولويات الرئيسية ممتلئة! قم بإزالة عنصر لإضافة جديد."),
+        "select_language": MessageLookupByLibrary.simpleMessage("اختر اللغة"),
         "task_added_to_priorities": m0,
         "time": MessageLookupByLibrary.simpleMessage("الوقت"),
         "top_priorities":

@@ -25,7 +25,7 @@ class _TimeBoxScreenState extends State<TimeBoxScreen>
   List<TimeSlot> timeSlots = [];
   String selectedTable = "";
   DateTime selectedDate = DateTime.now();
-  String currentLocale = 'en'; // Default locale
+  String currentLocale = ""; // Default locale
 
   late AnimationController _animationController;
 
@@ -47,6 +47,7 @@ class _TimeBoxScreenState extends State<TimeBoxScreen>
     super.initState();
     _setupAnimation();
     _initializeData();
+    _loadSavedLanguage();
   }
 
   @override
@@ -62,12 +63,24 @@ class _TimeBoxScreenState extends State<TimeBoxScreen>
     }
   }
 
+  Future<void> _loadSavedLanguage() async {
+    final savedLanguage = await StorageService.loadLanguage();
+    final newLocale = Locale(savedLanguage);
+    setState(() {
+      currentLocale = savedLanguage;
+      S.load(newLocale);
+      widget.onLanguageChanged(newLocale);
+      _updateDateController();
+    });
+  }
+
   void showLanguageSelectionDialog(BuildContext context) {
+    final delegate = S.of(context);
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Select Language'),
+          title: Text(delegate.select_language),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -75,19 +88,19 @@ class _TimeBoxScreenState extends State<TimeBoxScreen>
                 onPressed: () {
                   _changeLanguage('en', const Locale('en', 'US'));
                 },
-                child: const Text('English'),
+                child: Text(delegate.English),
               ),
               MaterialButton(
                 onPressed: () {
                   _changeLanguage('fr', const Locale('fr', 'FR'));
                 },
-                child: const Text('French'),
+                child: Text(delegate.French),
               ),
               MaterialButton(
                 onPressed: () {
                   _changeLanguage('ar', const Locale('ar', 'AR'));
                 },
-                child: const Text('Arabic'),
+                child: Text(delegate.Arabic),
               ),
             ],
           ),
@@ -103,6 +116,7 @@ class _TimeBoxScreenState extends State<TimeBoxScreen>
       widget.onLanguageChanged(locale);
       _updateDateController();
     });
+    StorageService.saveLanguage(langCode);
     Navigator.of(context).pop();
   }
 
@@ -220,7 +234,7 @@ class _TimeBoxScreenState extends State<TimeBoxScreen>
             onPressed: () {},
           ),
           IconButton(
-            icon: const Icon(Icons.settings),
+            icon: const Icon(Icons.language),
             onPressed: () {
               showLanguageSelectionDialog(context);
             },
@@ -379,13 +393,6 @@ class _TimeBoxScreenState extends State<TimeBoxScreen>
                     },
                     onAddToTopPriorities: (task) {
                       copyToTopPriorities(task, delegate);
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content:
-                              Text(delegate!.task_added_to_priorities(task)),
-                          duration: const Duration(seconds: 2),
-                        ),
-                      );
                     },
                   ),
                 ),
@@ -470,6 +477,12 @@ class _TimeBoxScreenState extends State<TimeBoxScreen>
     if (emptyIndex != -1) {
       setState(() {
         topPriorities[emptyIndex] = task;
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(delegate!.task_added_to_priorities(task)),
+            duration: const Duration(seconds: 2),
+          ),
+        );
       });
       _saveData();
     } else {

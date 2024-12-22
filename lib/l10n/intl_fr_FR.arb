@@ -18,7 +18,10 @@
         "boxtime": "Organisez votre temps pour plus d'efficacité",
         "next": "Suivant",
         "finish": "Terminer",
-
         "priorities_full": "Les Priorités Principales sont pleines ! Supprimez un élément pour en ajouter.",
-        "task_added_to_priorities": "{task} ajouté aux Priorités Principales"
+        "task_added_to_priorities": "{task} ajouté aux Priorités Principales",
+        "select_language":"Sélectionner la langue",
+        "English":"Anglais",
+        "French":"Français",
+        "Arabic":"Arabe"
 }

@@ -19,5 +19,9 @@
       "next": "التالي",
       "finish": "إنهاء",
       "priorities_full": "الأولويات الرئيسية ممتلئة! قم بإزالة عنصر لإضافة جديد.",
-      "task_added_to_priorities": "تمت إضافة {task} إلى الأولويات الرئيسية"
+      "task_added_to_priorities": "تمت إضافة {task} إلى الأولويات الرئيسية",
+      "select_language":"اختر اللغة",
+      "English":"الإنجليزية",
+      "French":"الفرنسية",
+      "Arabic":"العربية"
 }
