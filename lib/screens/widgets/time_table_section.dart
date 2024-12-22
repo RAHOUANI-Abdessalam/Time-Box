@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:time_box/generated/l10n.dart';
 import 'package:time_box/utils/helpers/helpers.dart';
-import '../../../models/time_slot.dart';
+import '../../models/time_slot.dart';
 
 class TimeTableSection extends StatelessWidget {
   final List<TimeSlot> timeSlots;

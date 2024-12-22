@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:time_box/generated/l10n.dart';
-import 'package:time_box/screens/time_box/time_box_screen.dart';
+import 'package:time_box/screens/time_box_screen.dart';
 
 void main() {
   group('TimeBoxScreen Widget Tests', () {

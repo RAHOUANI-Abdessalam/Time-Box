@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:time_box/generated/l10n.dart';
-import '../../../utils/helpers/helpers.dart';
+import '../../utils/helpers/helpers.dart';
 
 class BrainDumpSection extends StatefulWidget {
   final List<String> brainDump;

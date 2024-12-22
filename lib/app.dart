@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:time_box/screens/time_box/time_box_screen.dart';
+import 'package:time_box/screens/time_box_screen.dart';
 import 'package:time_box/services/storage_service.dart';
 import 'package:time_box/utils/themes/themes.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';

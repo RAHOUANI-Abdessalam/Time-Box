@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import '../../generated/l10n.dart';
-import '../../models/time_slot.dart';
-import '../../services/storage_service.dart';
+import 'package:time_box/utils/constant.dart';
+import '../generated/l10n.dart';
+import '../models/time_slot.dart';
+import '../services/storage_service.dart';
 // import '../../utils/helpers/helpers.dart';
-import '../../utils/helpers/tutorial_helper.dart';
+import '../utils/helpers/tutorial_helper.dart';
 import 'widgets/brain_dump_section.dart';
 import 'widgets/time_table_section.dart';
 import 'widgets/top_priorities_section.dart';
@@ -20,7 +21,8 @@ class TimeBoxScreen extends StatefulWidget {
 
 class _TimeBoxScreenState extends State<TimeBoxScreen>
     with SingleTickerProviderStateMixin {
-  List<String> topPriorities = List.filled(3, "", growable: false);
+  List<String> topPriorities =
+      List.filled(TimeBoxConstants.defaultPrioritiesCount, "", growable: false);
   List<String> brainDump = ["Ex task"];
   List<TimeSlot> timeSlots = [];
   String selectedTable = "";
@@ -163,12 +165,13 @@ class _TimeBoxScreenState extends State<TimeBoxScreen>
   void _updateDateController() {
     try {
       final formattedDate =
-          DateFormat('dd/MMM/yyyy', currentLocale).format(selectedDate);
+          DateFormat(TimeBoxConstants.defaultDateFormat, currentLocale)
+              .format(selectedDate);
       _dateController.text = formattedDate;
     } catch (e) {
       // Fallback to default locale if there's an error
-      final formattedDate =
-          DateFormat('dd/MMM/yyyy', 'en').format(selectedDate);
+      final formattedDate = DateFormat(TimeBoxConstants.defaultDateFormat, 'en')
+          .format(selectedDate);
       _dateController.text = formattedDate;
     }
   }
@@ -243,7 +246,7 @@ class _TimeBoxScreenState extends State<TimeBoxScreen>
       ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(TimeBoxConstants.defaultPadding),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -347,7 +350,7 @@ class _TimeBoxScreenState extends State<TimeBoxScreen>
 
   Widget _buildMainContent([S? delegate]) {
     return AnimatedSwitcher(
-      duration: const Duration(milliseconds: 500),
+      duration: TimeBoxConstants.animationDuration,
       child: selectedTable.isEmpty
           ? _buildAllTables(delegate)
           : _buildSelectedTable(delegate),
@@ -377,7 +380,7 @@ class _TimeBoxScreenState extends State<TimeBoxScreen>
                   ),
                 ),
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: TimeBoxConstants.defaultPadding),
               Expanded(
                 flex: 3,
                 child: GestureDetector(
@@ -400,7 +403,7 @@ class _TimeBoxScreenState extends State<TimeBoxScreen>
             ],
           ),
         ),
-        const SizedBox(width: 16),
+        const SizedBox(width: TimeBoxConstants.defaultPadding),
         Expanded(
           flex: 1,
           child: GestureDetector(

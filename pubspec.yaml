@@ -20,6 +20,9 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   intl: ^0.19.0
+  animated_text_kit:
+  animations:
+
 
 dev_dependencies:
   flutter_test:
