@@ -124,7 +124,7 @@ class _TimeBoxScreenState extends State<TimeBoxScreen>
 
   void _setupAnimation() {
     _animationController = AnimationController(
-      duration: const Duration(milliseconds: 300),
+      duration: TimeBoxConstants.animationDuration,
       vsync: this,
     );
     // _animation = CurvedAnimation(
